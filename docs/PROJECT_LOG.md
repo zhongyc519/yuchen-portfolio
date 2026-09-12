@@ -229,3 +229,5 @@ The personal portfolio remains important and can feature Urban Pulse as a flagsh
 - Agreed that both projects are highest priority.
 - Agreed weekly working availability: weekends ~2 hours/day, weekdays ~7–8 hours/day.
 - Established this project log as the continuity system.
+
+- Environment check: VS Code not detected; Node.js v24.19.0 and Git 2.53.0 are available only inside the current Codex environment, with no standalone system installation detected.
