@@ -55,12 +55,29 @@
     }
     document.querySelector('#case-steps').innerHTML=(item.steps || content.steps).map(([en,zh,descEn,descZh],i)=>`<article><span>0${i+1}</span><div><h3>${pick(en,zh)}</h3><p>${pick(descEn,descZh)}</p></div></article>`).join('');
   }
+  function processIconSvg(id){
+    const paths={
+      insight:'<path d="M8 32s9-14 24-14 24 14 24 14-9 14-24 14S8 32 8 32Z"/><circle cx="32" cy="32" r="7"/>',
+      strategy:'<circle cx="32" cy="32" r="23"/><path d="m39 25-5 9-9 5 5-9 9-5Z"/><path d="M32 5v7M32 52v7M5 32h7M52 32h7"/>',
+      concept:'<path d="M32 6 36 24 50 14 40 28 58 32 40 36 50 50 36 40 32 58 28 40 14 50 24 36 6 32 24 28 14 14 28 24 32 6Z"/>',
+      storytelling:'<path d="M6 36c7 0 7-8 14-8s7 8 14 8 7-8 14-8 7 8 10 8"/><path d="M6 25c7 0 7-8 14-8s7 8 14 8 7-8 14-8 7 8 10 8"/><path d="M6 47c7 0 7-8 14-8s7 8 14 8 7-8 14-8 7 8 10 8"/>',
+      alignment:'<circle cx="32" cy="12" r="5"/><circle cx="12" cy="46" r="5"/><circle cx="52" cy="46" r="5"/><circle cx="32" cy="34" r="6"/><path d="m32 17v11M27 37 16 43M37 37l11 6M17 43l11-9M47 43l-11-9"/>',
+      execution:'<path d="M10 46h28V18"/><path d="m26 30 12-12 12 12"/><path d="M16 38h14"/>'
+    };
+    return `<svg class="process-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">${paths[id]||paths.concept}</svg>`;
+  }
   function renderThinkingProcess(){
     const stage=document.querySelector('#thinking-stage');
     const rail=document.querySelector('#process-rail');
-    if(!stage||!rail||!content.process)return;
-    stage.innerHTML=content.process.map((item,index)=>`<article class="process-stage${index===0?' is-active':''}" data-stage="${item.id}"><div class="process-meta"><span>${item.number} / PROCESS</span><span>${pick('INPUT → OUTPUT','输入 → 输出')}</span></div><h3>${pick(item.en,item.zh)}</h3><p class="process-meaning">${pick(item.meaningEn,item.meaningZh)}</p><ul>${pick(item.inputsEn,item.inputsZh).map(input=>`<li>${input}</li>`).join('')}</ul></article>`).join('');
+    const summary=document.querySelector('#process-summary');
+    const field=document.querySelector('.process-field');
+    if(!stage||!rail||!summary||!field||!content.process)return;
+    stage.innerHTML=content.process.map((item,index)=>`<article class="process-stage${index===0?' is-active':''}" data-stage="${item.id}"><div class="process-meta"><span>${item.number} / PROCESS</span><span>${pick('INPUT → OUTPUT','输入 → 输出')}</span></div><div class="process-stage-title"><span class="process-stage-icon">${processIconSvg(item.id)}</span><h3>${pick(item.en,item.zh)}</h3></div><p class="process-meaning">${pick(item.meaningEn,item.meaningZh)}</p><ul>${pick(item.inputsEn,item.inputsZh).map(input=>`<li>${input}</li>`).join('')}</ul></article>`).join('');
     rail.innerHTML=content.process.map((item,index)=>`<li class="${index===0?'is-active':''}" data-stage-index="${index}"><span>${item.number}</span><b>${pick(item.en,item.zh)}</b></li>`).join('');
+    summary.innerHTML=`<div class="process-summary-copy"><span>${pick('THE COMPLETE METHOD','完整工作方法')}</span><h3>${pick('From complexity to clarity.','从复杂，到清晰。')}</h3><p>${pick('Six connected moves. One clear direction.','六个相连步骤，形成一个清晰方向。')}</p></div><ol>${content.process.map(item=>`<li data-summary-stage="${item.id}"><span>${processIconSvg(item.id)}</span><b>${pick(item.en,item.zh)}</b><small>${item.number}</small></li>`).join('')}</ol>`;
+    let icons=field.querySelector('.field-icons');
+    if(!icons){icons=document.createElement('div');icons.className='field-icons';field.append(icons);}
+    icons.innerHTML=content.process.map(item=>`<span class="field-icon" data-field-icon="${item.id}">${processIconSvg(item.id)}</span>`).join('');
   }
   function render() {
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';

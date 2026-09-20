@@ -20,17 +20,10 @@ html{scroll-behavior:auto;scroll-padding-top:100px;color-scheme:dark}
 .cinematic-page .ember-actions{display:flex;gap:14px;flex-wrap:wrap}
 .cinematic-page .ember-actions a{background:transparent;border:1px solid var(--border-dark);border-radius:75px;padding:11px 28px;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:14px;min-width:210px;transition:border-color .8s var(--ease-liquid)}
 .cinematic-page .ember-actions a:hover{border-color:white}
-.cinematic-page .principle-scene{display:none;font-weight:300;font-size:clamp(58px,9vw,140px);line-height:.98;letter-spacing:-.045em;max-width:1050px}
 .cinematic-page .ember-coordinates{font-size:11px;letter-spacing:.1px;line-height:1.5;max-width:430px;color:#ddd}.cinematic-page .ember-coordinates b{display:none}
 .cinematic-page .ember-bottom{display:flex;gap:32px;position:absolute;bottom:28px;left:4%;font-size:11px}.cinematic-page .ember-bottom a{min-height:44px;display:flex;align-items:center}
 .cinematic-page .wave-toggle{position:absolute;right:4%;bottom:32px;z-index:4;background:transparent;border:1px solid var(--border-dark);border-radius:75px;color:white;font-size:11px;min-height:44px;padding:10px 20px}
 .cinematic-page .profile-panel[hidden]{display:none}
-.cinematic-page .story-active .ember-hero{height:100svh;min-height:680px;padding:0}
-.cinematic-page.story-active .ember-hero{height:100svh;min-height:680px;padding:0}
-.cinematic-page.story-active .ember-name{position:absolute;left:8%;top:50%;width:84%;margin:0;transform:translateY(-50%)}
-.cinematic-page.story-active .ember-description{position:absolute;left:17%;top:50%;width:77%;margin:0;transform:translateY(-50%)}
-.cinematic-page.story-active .principle-scene{display:block;position:absolute;left:8%;top:50%;width:84%;transform:translateY(-50%)}
-.cinematic-page.story-active .ember-coordinates{position:absolute;left:4%;bottom:108px}
 .cinematic-page .discipline-strip{background:var(--obsidian);border:0;border-bottom:1px solid #333;color:#aaa;padding:36px 6%;font-size:11px;letter-spacing:.25px}.cinematic-page .discipline-strip i{display:none}
 .cinematic-page .section{max-width:var(--measure);margin:auto;padding:152px 0;border:0;scroll-margin-top:16px}
 .cinematic-page .section h2{font-size:clamp(44px,6vw,78px);font-weight:300;line-height:1.1;letter-spacing:-.04em;text-wrap:balance;margin:28px 0 40px}
@@ -59,9 +52,9 @@ html{scroll-behavior:auto;scroll-padding-top:100px;color-scheme:dark}
 @media(max-width:1200px){.cinematic-page .section{margin-inline:6%}.cinematic-page .lab{margin:0}.cinematic-page footer{margin-inline:6%}.cinematic-page .header{gap:24px}.cinematic-page nav{gap:18px}}
 @media(max-width:700px){
  .cinematic-page .header{height:120px;padding:8px 6%;grid-template-columns:1fr auto;gap:0;background:linear-gradient(#000c,#0000)}.cinematic-page .header .wordmark{font-size:10px;min-height:44px;justify-content:center}.cinematic-page .language{grid-column:2;grid-row:1;font-size:11px}.cinematic-page nav{grid-row:2;grid-column:1/-1;justify-content:space-between;gap:4px;font-size:9px}.cinematic-page nav a:nth-child(n){display:flex;padding:0 3px}
- .cinematic-page .ember-hero{padding:160px 6% 150px;min-height:100svh}.cinematic-page .ember-name{font-size:21vw;line-height:.94;margin:32px 0 80px;letter-spacing:-.045em}.cinematic-page .last-name{margin-left:10%}.cinematic-page.story-active .ember-hero{min-height:620px}.cinematic-page.story-active .ember-name{left:6%;width:88%;top:44%}
- .cinematic-page.story-active .ember-description{left:7%;width:86%;top:48%}.cinematic-page .ember-description h2{font-size:clamp(32px,8.7vw,50px);line-height:1.12;margin-bottom:24px}.cinematic-page .ember-description p{font-size:15px;line-height:1.6;margin-bottom:24px}.cinematic-page .ember-actions{gap:10px;flex-wrap:nowrap}.cinematic-page .ember-actions a{font-size:10px;padding:11px 12px;min-width:0;min-height:44px;gap:10px;flex:1;white-space:nowrap}
- .cinematic-page.story-active .principle-scene{left:7%;width:86%;font-size:16vw;line-height:1.05}.cinematic-page .ember-coordinates{font-size:9px;max-width:70%}.cinematic-page.story-active .ember-coordinates{bottom:155px;left:6%}.cinematic-page .ember-bottom{left:6%;bottom:85px;font-size:10px;gap:24px}.cinematic-page .wave-toggle{bottom:24px;right:auto;left:6%;font-size:10px;padding:10px 15px}
+ .cinematic-page .ember-hero{padding:160px 6% 150px;min-height:100svh}.cinematic-page .ember-name{font-size:21vw;line-height:.94;margin:32px 0 80px;letter-spacing:-.045em}.cinematic-page .last-name{margin-left:10%}
+ .cinematic-page .ember-description h2{font-size:clamp(32px,8.7vw,50px);line-height:1.12;margin-bottom:24px}.cinematic-page .ember-description p{font-size:15px;line-height:1.6;margin-bottom:24px}.cinematic-page .ember-actions{gap:10px;flex-wrap:nowrap}.cinematic-page .ember-actions a{font-size:10px;padding:11px 12px;min-width:0;min-height:44px;gap:10px;flex:1;white-space:nowrap}
+ .cinematic-page .ember-coordinates{font-size:9px;max-width:70%}.cinematic-page .ember-bottom{left:6%;bottom:85px;font-size:10px;gap:24px}.cinematic-page .wave-toggle{bottom:24px;right:auto;left:6%;font-size:10px;padding:10px 15px}
  .cinematic-page .section{padding-block:80px}.cinematic-page .section h2{font-size:42px}.cinematic-page .section p{font-size:16px}.cinematic-page .section-heading{display:block}
  .cinematic-page #capabilities{display:block;padding-block:80px}.cinematic-page #capabilities .section-heading{position:static}.cinematic-page #capabilities h2{font-size:42px}.cinematic-page .capabilities{padding-top:30px}.cinematic-page .capabilities article:nth-child(n){min-height:0;padding:40px 0!important}.cinematic-page .capabilities h3{font-size:32px}.cinematic-page .capabilities p{font-size:16px}
  .cinematic-page .work-card{margin-bottom:80px}.cinematic-page .work-art,.cinematic-page .work-card:first-child .work-art{aspect-ratio:1;height:auto}.cinematic-page .work-art>span{font-size:24px;letter-spacing:-.5px}.cinematic-page .work-art small{left:18px;font-size:8px}.cinematic-page .card-details h3{font-size:32px}.cinematic-page #work .section-heading{margin-bottom:48px}
@@ -74,12 +67,10 @@ html{scroll-behavior:auto;scroll-padding-top:100px;color-scheme:dark}
 @media(min-width:701px){.cinematic-page .wave-toggle{right:170px}}
 
 
-/* Keep the reading scene geometrically centered; GSAP owns vertical translation. */
-.cinematic-page.story-active .ember-description{left:50%;width:min(86%,900px);max-width:900px;translate:-50% 0;top:50%;will-change:transform,opacity}
 .cinematic-page .ember-name .portfolio-caption{display:block;margin:28px 0 0 18%;font-size:12px;font-weight:400;line-height:1.5;letter-spacing:.18em}
 .cinematic-page .about-return{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0 0 24px;font-size:12px;border-bottom:1px solid #666}
-@media(max-width:700px){.cinematic-page.story-active .ember-description{left:50%;top:48%;width:86%}.cinematic-page .ember-name .portfolio-caption{font-size:9px;margin-top:20px}}
-@media(max-height:700px) and (min-width:701px){.cinematic-page.story-active .ember-hero{min-height:100svh}.cinematic-page .ember-description h2{font-size:clamp(34px,5vw,60px)}.cinematic-page .ember-description p{font-size:16px;margin-bottom:20px}.cinematic-page .ember-description h2{margin-bottom:20px}}
+@media(max-width:700px){.cinematic-page .ember-name .portfolio-caption{font-size:9px;margin-top:20px}}
+@media(max-height:700px) and (min-width:701px){.cinematic-page .ember-description h2{font-size:clamp(34px,5vw,60px)}.cinematic-page .ember-description p{font-size:16px;margin-bottom:20px}.cinematic-page .ember-description h2{margin-bottom:20px}}
 
 /* Section 02: compact overview, same atmosphere with a quieter, cooler treatment. */
 .cinematic-page #capabilities{display:block;padding:72px 32px;isolation:isolate;overflow:hidden;background:#080a0b}
