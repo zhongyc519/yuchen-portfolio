@@ -8,7 +8,7 @@ test('continuous experience markup and motion hooks exist', async () => {
   const html = await read('index.html');
   const css = await read('experience-system.css');
   const js = await read('experience-system.js');
-  for (const id of ['hero-scene', 'experience-bridge', 'thinking-process', 'process-summary', 'method-handoff']) {
+  for (const id of ['hero-scene', 'thinking-process', 'process-summary', 'method-handoff']) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
   assert.match(css, /--ease-cinematic:\s*cubic-bezier\(\.19,\s*1,\s*\.22,\s*1\)/);
@@ -31,19 +31,20 @@ test('primary navigation anchors resolve to real page targets', async () => {
   for (const target of targets) assert.match(html, new RegExp(`id=["']${target}["']`));
 });
 
-test('hero exposes five exclusive narrative scenes and a continuity line', async () => {
+test('hero exposes five exclusive narrative scenes without decorative connector lines', async () => {
   const html = await read('index.html');
   const js = await read('experience-system.js');
-  for (const hook of ['hero-phase-name', 'hero-discipline-scene', 'hero-proposition-a', 'hero-proposition-b', 'hero-resolution', 'hero-continuity-line']) {
+  for (const hook of ['hero-phase-name', 'hero-discipline-scene', 'hero-proposition-a', 'hero-proposition-b', 'hero-resolution']) {
     assert.match(html, new RegExp(hook));
   }
   assert.equal((html.match(/data-hero-scene=/g) || []).length, 5);
+  assert.doesNotMatch(html, /hero-continuity-line/);
   assert.match(js, /setHeroScene/);
 });
 
-test('about preserves approved evidence and the narrative spine', async () => {
+test('about preserves approved evidence without an arbitrary narrative spine', async () => {
   const html = await read('index.html');
-  assert.match(html, /class="[^"]*narrative-spine/);
+  assert.doesNotMatch(html, /narrative-spine/);
   assert.match(html, /about-portrait/);
   assert.match(html, />40\+</);
   assert.match(html, />10\+</);
@@ -57,8 +58,7 @@ test('experience remains credible and no longer duplicates project case studies'
   }
   assert.doesNotMatch(html, /class="career-selected"/);
   assert.doesNotMatch(css, /career-detail li:nth-child\(n\+4\)\s*\{\s*display:\s*none/);
-  assert.match(html, /id="experience-bridge"/);
-  for (const stage of ['RESEARCH', 'CONCEPT', 'EXPERIENCE', 'DELIVERY']) assert.match(html, new RegExp(`>${stage}<`));
+  assert.doesNotMatch(html, /id="experience-bridge"/);
 });
 
 test('thinking process contains all six stages and replaces the card grid', async () => {
@@ -75,6 +75,8 @@ test('thinking process contains all six stages and replaces the card grid', asyn
   assert.match(app, /processIconSvg/);
   assert.match(app, /class="process-icon"/);
   assert.match(html, /id="process-summary"/);
+  assert.match(html, /class="thinking-header-rule"/);
+  assert.ok((html.match(/<circle\b/g) || []).length >= 13);
 });
 
 test('one top-level thinking timeline owns the pinned sequence', async () => {
@@ -84,6 +86,9 @@ test('one top-level thinking timeline owns the pinned sequence', async () => {
   assert.match(js, /trigger:\s*process/);
   assert.match(js, /pin:\s*true/);
   assert.match(js, /scrub:\s*(?:0?\.\d+|\d+)/);
+  assert.match(js, /nodes\.length\s*!==\s*15/);
+  assert.match(js, /scatterShapes/);
+  assert.match(js, /orbitOffsets/);
 });
 
 test('method handoff replaces the unowned proof word and preserves work controls', async () => {
