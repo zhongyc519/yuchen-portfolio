@@ -1,0 +1,66 @@
+/* User-directed refinement: restored cinematic hero, complete CV, no blue panels. */
+.studio-page .header{border-bottom:1px solid rgba(255,255,255,.16)}
+.studio-page .header .wordmark{font-size:12px;font-weight:500;letter-spacing:.02em;white-space:nowrap}
+.studio-page .header .wordmark::after{content:'•';color:var(--acid);margin-left:.65rem;font-size:1.1em}
+.studio-page nav a::after{bottom:4px;height:2px}
+
+.studio-page #experience{grid-template-columns:minmax(210px,.72fr) minmax(0,2.7fr);gap:7%;padding-bottom:140px}
+.studio-page .career-aside{top:118px}
+.studio-page .career-detail{margin-top:28px}
+.studio-page .career-detail ul{padding-left:1.15rem;margin:0}
+.studio-page .career-detail li{font-size:14px;line-height:1.72;color:#b8b8b1;margin:0 0 16px}
+.studio-page .career-selected{margin:48px 0 0;border-top:1px solid #555;padding-top:26px}
+.studio-page .career-selected>h4{font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--acid);margin:0 0 18px}
+.studio-page .career-selected article{display:grid;grid-template-columns:minmax(150px,.7fr) minmax(0,2fr);gap:24px;padding:22px 0;border-top:1px solid #2f302d}
+.studio-page .career-selected h5{font-size:15px;font-weight:550;line-height:1.3;margin:0;color:#f1f1eb}
+.studio-page .career-selected p{font-size:13px;line-height:1.65;margin:0;color:#aaa}
+.studio-page .education-block{margin-top:100px}
+.studio-page .education-block>h3{font-size:clamp(38px,4.5vw,62px);font-weight:500;letter-spacing:-.05em;margin:0 0 34px}
+.studio-page #education-list{border-top:1px solid #555}
+.studio-page .education-row{display:grid;grid-template-columns:minmax(210px,.7fr) minmax(0,1.4fr);gap:40px;align-items:center;min-height:220px;padding:34px 0;border-bottom:1px solid #555}
+.studio-page .education-row>div:last-child{padding-right:4%}
+.studio-page .education-date{display:block;font-size:11px;color:var(--acid);letter-spacing:.1em;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.studio-page .education-row h4{font-size:clamp(25px,3vw,42px);line-height:1.05;letter-spacing:-.045em;font-weight:500;margin:0 0 12px}
+.studio-page .education-row p{font-size:14px;color:#c4c4bd;margin:0}
+.studio-page .school-logo{height:100px;display:flex;align-items:center;justify-content:flex-start;overflow:hidden}
+.studio-page .school-logo img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;object-position:left center}
+.studio-page .school-logo.aberdeen{height:86px}
+.studio-page .school-logo.ual{height:88px}
+.studio-page .school-logo.ual img{filter:contrast(1.08)}
+.studio-page .school-logo.shrewsbury{height:132px}
+.studio-page .education-context{display:grid;grid-template-columns:1fr 1fr;gap:35px;margin-top:34px}
+.studio-page .education-context p{font-size:13px;margin:0;color:#999}
+
+.studio-page #capabilities-grid article:nth-child(n){display:grid;grid-template-columns:54px minmax(0,1fr) 30px;column-gap:18px;align-items:start}
+.studio-page #capabilities-grid .capability-icon{grid-column:1;grid-row:1/3;width:30px;height:30px;margin:2px 0 0 3px;color:#eef6df;filter:drop-shadow(0 0 4px rgba(221,250,54,.85)) drop-shadow(0 0 14px rgba(221,250,54,.35))}
+.studio-page #capabilities-grid h3{grid-column:2;grid-row:1}
+.studio-page #capabilities-grid p{grid-column:2;grid-row:2}
+.studio-page #capabilities-grid .small-number{grid-column:3;grid-row:1;position:static;text-align:right}
+
+.studio-page .work-card:nth-child(3n) .work-entry-cover{background:#b64f37;color:#fff}
+.studio-page .international{display:none!important}
+
+.studio-page .contact{max-width:1320px}
+.studio-page .contact>p{max-width:600px}
+.studio-page .contact-layout{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:70px;align-items:end;margin-top:34px}
+.studio-page .contact .actions{margin:0;align-self:end}
+.studio-page .wechat-code{margin:0;display:grid;grid-template-columns:150px;justify-items:center;gap:12px}
+.studio-page .wechat-code a{display:block;width:150px;height:150px;overflow:hidden}
+.studio-page .wechat-code img{display:block;width:100%;height:100%;object-fit:cover}
+.studio-page .wechat-code figcaption{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:#111}
+.studio-page .wechat-code figcaption strong{font-size:13px}
+
+@media(max-width:800px){
+ .studio-page .header .wordmark{font-size:11px}
+ .studio-page #experience{display:block;padding-bottom:90px}
+ .studio-page .career-selected article{grid-template-columns:1fr;gap:8px}
+ .studio-page .education-block{margin-top:68px}
+ .studio-page .education-row{grid-template-columns:1fr;gap:20px;min-height:0;padding:30px 0}
+ .studio-page .school-logo{height:75px}.studio-page .school-logo.shrewsbury{height:108px}
+ .studio-page .education-context{grid-template-columns:1fr;gap:16px}
+ .studio-page #capabilities-grid article:nth-child(n){grid-template-columns:44px minmax(0,1fr) 28px;column-gap:12px}
+ .studio-page .contact-layout{grid-template-columns:1fr;gap:38px}
+ .studio-page .wechat-code{grid-template-columns:132px;justify-items:start}
+ .studio-page .wechat-code a{width:132px;height:132px}
+ .studio-page .wechat-code figcaption{align-items:flex-start}
+}

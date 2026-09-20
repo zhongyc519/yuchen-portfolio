@@ -1,0 +1,69 @@
+.wave-page{--lime:#d8d8d8;--line:#303030;background:#080808}
+.wave-page .header{background:#000;color:#e5e5e5}
+.wave-page nav a::before{display:none}.wave-page nav a:hover{color:#fff}
+.wave-page .ember-hero{background:#000;min-height:690px;color:#e9e9e9}
+.wave-page .ember-visual{background:#000;inset:12% -10% -12%;opacity:.85}
+#wave-canvas{width:100%;height:100%;display:block}
+.wave-page .ember-glass{inset:0;backdrop-filter:none;background:linear-gradient(180deg,#0000 30%,#0003 65%,#000c);border:0;pointer-events:none}
+.wave-page .ember-name{font-weight:400;font-size:clamp(70px,8.2vw,145px);letter-spacing:-.065em;line-height:.95}
+.wave-page .ember-name .first-name{top:9%;left:6%}.wave-page .ember-name .last-name{top:calc(9% + .98em);left:6%;right:auto;bottom:auto}
+.wave-page .ember-description{left:53%;bottom:auto;top:15%;width:39%;max-width:510px}
+.wave-page .ember-description .eyebrow{display:none}
+.wave-page .ember-description h2{font-size:clamp(24px,2.5vw,39px);font-weight:400;line-height:1.2;margin:0 0 24px}
+.wave-page .ember-description p{color:#b8b8b8;font-size:14px;line-height:1.7;max-width:380px}
+.wave-page .ember-actions a{color:#e2e2e2;border-color:#777}.wave-page .ember-actions a:hover{color:#fff;border-color:#fff}
+.wave-page .ember-coordinates{top:auto;bottom:6%;left:6%;right:auto;color:#999}.wave-page .ember-coordinates b{display:none}
+.wave-page .ember-bottom{bottom:5%;left:auto;right:6%;width:33%;color:#bbb}
+.wave-toggle{position:absolute;right:6%;bottom:14%;background:#0008;color:#bbb;border:1px solid #555;padding:10px 15px;border-radius:24px;font-size:11px;cursor:pointer}
+.wave-page .discipline-strip{background:#161616;color:#aaa}.wave-page .discipline-strip i{color:#777}
+.wave-page .primary{background:#dedede;color:#111}.wave-page .primary:hover{background:white}
+.wave-page .lab{background:#d0d0ce}.wave-page .contact{background:#0c0c0c}
+.wave-page .floating-guide{background:#202020;color:#eee;border-color:#555}.wave-page .floating-guide .spark{color:#bbb}
+.wave-page .ember-actions{gap:12px;align-items:center}
+.wave-page .ember-actions a,.wave-page .floating-guide{
+ border:1px solid transparent;border-radius:999px;
+ background:linear-gradient(150deg,#15191deF,#07090bf5) padding-box,linear-gradient(120deg,#cbd9e6,#516479 45%,#a9bccd 78%,#657583) border-box;
+ box-shadow:0 0 9px #c9deff22,0 0 24px #afcfff0c,inset 0 1px 9px #d8eaff0c;
+ color:#f0f2f5;transition:box-shadow .3s ease,transform .3s ease;
+}
+.wave-page .ember-actions a{padding:14px 20px;min-height:46px;font-size:10px;letter-spacing:.65px;text-transform:none;white-space:nowrap}
+.wave-page .ember-actions a:hover,.wave-page .floating-guide:hover{
+ border-color:transparent;color:#fff;box-shadow:0 0 12px #c9deff55,0 0 30px #afcfff22,inset 0 1px 12px #d8eaff16;transform:translateY(-1px);
+}
+.wave-page .ember-actions a:focus-visible,.wave-page .floating-guide:focus-visible{outline:2px solid #e2edff;outline-offset:5px}
+.wave-page .floating-guide{min-height:48px;padding:14px 24px;font-size:12px}
+.wave-page .floating-guide .spark{font-size:15px;color:#e1ebf8;text-shadow:0 0 9px #b5d7ff}
+@media(prefers-reduced-motion:reduce){.wave-page .ember-actions a,.wave-page .floating-guide{transition:none}.wave-page .ember-actions a:hover,.wave-page .floating-guide:hover{transform:none}}
+@media(max-width:680px){
+ .wave-page .ember-hero{min-height:850px;height:calc(100svh - 108px)}
+ .wave-page .ember-name,.wave-page:lang(zh-CN) .ember-name{font-size:18vw;letter-spacing:-.065em}
+ .wave-page .ember-name .first-name{top:35px}.wave-page .ember-name .last-name{top:calc(35px + .98em)}
+ .wave-page .ember-description{position:absolute;top:235px;left:6%;width:88%;margin:0;padding:0;background:none}
+ .wave-page .ember-description h2{font-size:29px;color:#eee}.wave-page .ember-description p{color:#bbb;font-size:13px;max-width:310px}
+ .wave-page .ember-visual{inset:360px -40% 10px;height:auto;opacity:.7}
+ .wave-page .ember-coordinates{bottom:90px;max-width:65%;line-height:1.7}.wave-page .ember-coordinates>span{display:block;text-align:left;max-width:none;font-size:7px}
+ .wave-page .ember-bottom{position:absolute;bottom:28px;left:6%;right:6%;width:auto;background:none;border:0;padding:0}
+ .wave-toggle{bottom:150px}.wave-page .header{background:#000}.wave-page .ember-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.wave-page .ember-actions a{justify-content:center;gap:8px;padding:13px 9px;font-size:9px;letter-spacing:0}
+}
+/* Profile is a second state of the same hero, over the live sculpture. */
+.wave-page .about-trigger,.profile-back{border:1px solid #9eafc0;border-radius:999px;background:#111820;color:#edf4ff;padding:14px 20px;min-height:46px;font-size:10px;box-shadow:0 0 12px #c9deff25;cursor:pointer}
+.wave-page .about-trigger:hover,.profile-back:hover{box-shadow:0 0 20px #c9deff55}
+.profile-panel[hidden]{display:none}.profile-panel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;width:min(630px,70%);margin:auto;z-index:2;outline:none}
+.profile-panel h2{font-size:12px;letter-spacing:1px;color:#bec7d0;margin-bottom:25px;font-weight:400}
+.profile-panel p{font-size:clamp(24px,2.6vw,38px);font-weight:400;line-height:1.22;letter-spacing:-.8px;margin:0 0 30px;text-shadow:0 2px 15px #000,0 0 45px #000}
+.profile-open .ember-name,.profile-open .ember-description,.profile-open .ember-coordinates{visibility:hidden}.profile-open .ember-visual{opacity:.45}.profile-open .ember-glass{background:radial-gradient(ellipse at center,#0008,transparent 75%)}
+.wave-page #work{background:#000;padding:80px 5% 45px 10%;position:relative}
+.wave-page #work .section-heading{display:block;margin-bottom:28px}
+.wave-page #work .section-heading h2{font-size:28px;letter-spacing:-.7px;line-height:1.1}.wave-page #work .section-heading h2 br{display:none}
+.wave-page #work .section-index{position:absolute;left:3%;top:220px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:#ddd}
+.wave-page #work .section-note{max-width:650px;font-size:12px;margin-top:14px}
+.wave-page #work .work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wave-page #work .work-card{background:#1b1b1b;border:0;padding:10px 32px 20px 10px;text-align:left;position:relative;border-radius:0;min-height:410px}
+.wave-page #work .work-art{aspect-ratio:1.08;height:auto;min-height:0;margin-bottom:20px;filter:grayscale(.65)}
+.wave-page #work .card-details{padding:0 0 0 2px}.wave-page #work .card-details p{position:absolute;right:10px;top:12px;writing-mode:vertical-rl;font-size:9px;color:#fff;letter-spacing:.2px;margin:0}
+.wave-page #work .card-details h3{font-size:19px;letter-spacing:-.25px;margin:8px 0 16px}.wave-page #work .card-details .draft{font-size:9px;color:#999}
+.wave-page #work .work-card:hover .work-art{filter:grayscale(0)}
+.wave-page #archive{padding:25px 5% 80px 10%;background:#000}.wave-page #archive .section-heading h2{font-size:25px}.wave-page #archive .archive-grid{gap:18px}.wave-page #archive .archive-item{background:#1b1b1b;padding:10px 10px 18px}.wave-page #archive .archive-item h3{font-size:16px}
+@media(max-width:1000px){.wave-page .ember-actions{gap:10px}.wave-page .ember-actions a,.wave-page .about-trigger{padding:12px 14px;font-size:9px}.wave-page #work .work-card{min-height:330px}}
+@media(max-width:680px){.wave-page .ember-actions{grid-template-columns:1fr 1fr}.wave-page .about-trigger{grid-column:1/-1;justify-self:start}.profile-panel{width:84%;justify-content:flex-start;padding-top:110px}.profile-panel p{font-size:26px;line-height:1.3}.wave-page #work{padding:60px 6% 25px}.wave-page #work .section-index{position:static;writing-mode:initial;transform:none;font-size:10px}.wave-page #work .work-grid{grid-template-columns:1fr 1fr;gap:12px}.wave-page #work .work-card{min-height:280px;padding:8px 24px 12px 8px}.wave-page #work .card-details h3{font-size:15px;line-height:1.2}.wave-page #work .card-details p{right:7px;font-size:7px}.wave-page #work .work-art>span{font-size:18px}.wave-page #archive{padding:25px 6% 60px}.wave-page #archive .archive-grid{grid-template-columns:1fr 1fr;gap:12px}}
+.wave-page #work .work-card{display:flex;flex-direction:column;align-items:stretch}.wave-page #work .work-art{flex-shrink:0;width:100%}.wave-page #work .card-details{flex:1}
