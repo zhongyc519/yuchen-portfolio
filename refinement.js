@@ -8,6 +8,7 @@
   let signalFrame = 0;
   function updateSignal() {
     signalFrame = 0;
+    if (!sequence) return;
     const box = sequence.getBoundingClientRect();
     const progress = reduced.matches ? 1 : Math.max(0, Math.min(1, (innerHeight * .7 - box.top) / Math.max(1, box.height - 50)));
     const items = [...sequence.children];
@@ -33,9 +34,11 @@
     glide(element, { y: [16, 0] }, .7);
   }, { amount: .15 });
   const profile = document.querySelector('#profile-panel');
-  new MutationObserver(() => {
-    if (!profile.hidden) glide(profile, { y: [10, 0], opacity: [.7, 1] }, .4);
-  }).observe(profile, { attributes: true, attributeFilter: ['hidden'] });
+  if (profile) {
+    new MutationObserver(() => {
+      if (!profile.hidden) glide(profile, { y: [10, 0], opacity: [.7, 1] }, .4);
+    }).observe(profile, { attributes: true, attributeFilter: ['hidden'] });
+  }
   document.querySelectorAll('dialog').forEach(dialog => {
     new MutationObserver(() => {
       if (dialog.open) glide(dialog, { y: [12, 0], opacity: [.8, 1] }, .28);

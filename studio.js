@@ -13,7 +13,6 @@
       document.querySelectorAll('.section-heading, .cv-evidence, .cv-timeline article, .background-heading, .cv-background, .contact h2').forEach(el => {
         gs.from(el,{y:36,opacity:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 92%',once:true}});
       });
-      gs.from('#capabilities-grid article',{y:25,opacity:0,duration:.7,stagger:.07,ease:'power3.out',scrollTrigger:{trigger:'#capabilities-grid',start:'top 90%',once:true}});
     });
     st.refresh();
   }
@@ -24,7 +23,8 @@
   const sections=document.querySelectorAll('main section[id]');
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
     if(entry.isIntersecting) document.querySelectorAll('nav a').forEach(a=>{
-      if(a.hash==='#'+entry.target.id)a.setAttribute('aria-current','location');
+      const sectionHash=entry.target.id==='thinking-process'?'#capabilities':'#'+entry.target.id;
+      if(a.hash===sectionHash)a.setAttribute('aria-current','location');
       else a.removeAttribute('aria-current');
     });
   }),{rootMargin:'-15% 0px -60% 0px'});

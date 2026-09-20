@@ -55,6 +55,13 @@
     }
     document.querySelector('#case-steps').innerHTML=(item.steps || content.steps).map(([en,zh,descEn,descZh],i)=>`<article><span>0${i+1}</span><div><h3>${pick(en,zh)}</h3><p>${pick(descEn,descZh)}</p></div></article>`).join('');
   }
+  function renderThinkingProcess(){
+    const stage=document.querySelector('#thinking-stage');
+    const rail=document.querySelector('#process-rail');
+    if(!stage||!rail||!content.process)return;
+    stage.innerHTML=content.process.map((item,index)=>`<article class="process-stage${index===0?' is-active':''}" data-stage="${item.id}"><div class="process-meta"><span>${item.number} / PROCESS</span><span>${pick('INPUT → OUTPUT','输入 → 输出')}</span></div><h3>${pick(item.en,item.zh)}</h3><p class="process-meaning">${pick(item.meaningEn,item.meaningZh)}</p><ul>${pick(item.inputsEn,item.inputsZh).map(input=>`<li>${input}</li>`).join('')}</ul></article>`).join('');
+    rail.innerHTML=content.process.map((item,index)=>`<li class="${index===0?'is-active':''}" data-stage-index="${index}"><span>${item.number}</span><b>${pick(item.en,item.zh)}</b></li>`).join('');
+  }
   function render() {
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
     document.title = pick('Yuchen Zhong — Ideas into experiences','Yuchen Zhong — 让想法发生');
@@ -65,7 +72,7 @@
     const button = document.querySelector('#language');
     button.innerHTML=language==='en'?'EN <span>/ 中</span>':'中 <span>/ EN</span>';
     button.setAttribute('aria-label',pick('Switch to Chinese','切换为英文'));
-    if(document.querySelector('#capabilities-grid')) document.querySelector('#capabilities-grid').innerHTML=content.capabilities.map(([n,en,zh,de,dz])=>`<article><span class="small-number">${n}</span><h3>${pick(en,zh)}</h3><p>${pick(de,dz)}</p></article>`).join('');
+    renderThinkingProcess();
     document.querySelector('#work-grid').innerHTML=content.cases.map((item,i)=>`<button class="work-card" data-case="${i}"><div class="work-art ${item.type}" aria-hidden="true"><div class="shapes"><i></i><i></i><i></i></div><span>${i===0?'FORM / SPACE':i===1?'A DIFFERENT<br>POINT OF VIEW':'IDEAS,<br>IN ORDER.'}</span><small>0${i+1} — ${pick(content.cvBacked?'ABSTRACT COVER · NOT PROJECT PHOTOGRAPHY':'VISUAL STUDY',content.cvBacked?'抽象封面 · 非项目照片':'视觉探索')}</small></div><div class="card-details"><p>${pick(item.tagEn,item.tagZh)}</p><h3>${pick(item.en,item.zh)} <span>↗</span></h3><span class="draft">${pick(content.cvBacked?'EXPLORE PROJECT':'CASE STUDY TO FOLLOW',content.cvBacked?'查看项目':'项目案例待补充')}</span></div></button>`).join('');
     if(document.body.classList.contains('home-page')) {
       document.title=pick('Yuchen Zhong — Concepts, narratives & actionable projects','Yuchen Zhong — 概念、叙事与可推进的项目');
