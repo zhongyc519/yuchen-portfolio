@@ -31,13 +31,14 @@ test('primary navigation anchors resolve to real page targets', async () => {
   for (const target of targets) assert.match(html, new RegExp(`id=["']${target}["']`));
 });
 
-test('hero exposes five exclusive narrative scenes without decorative connector lines', async () => {
+test('hero exposes four exclusive narrative scenes and resolves with the method signature', async () => {
   const html = await read('index.html');
   const js = await read('experience-system.js');
-  for (const hook of ['hero-phase-name', 'hero-discipline-scene', 'hero-proposition-a', 'hero-proposition-b', 'hero-resolution']) {
+  for (const hook of ['hero-phase-name', 'hero-proposition-a', 'hero-proposition-b', 'hero-resolution', 'hero-method-signature']) {
     assert.match(html, new RegExp(hook));
   }
-  assert.equal((html.match(/data-hero-scene=/g) || []).length, 5);
+  assert.equal((html.match(/data-hero-scene=/g) || []).length, 4);
+  assert.doesNotMatch(html, /hero-discipline-scene/);
   assert.doesNotMatch(html, /hero-continuity-line/);
   assert.match(js, /setHeroScene/);
 });
@@ -77,6 +78,7 @@ test('thinking process contains all six stages and replaces the card grid', asyn
   assert.match(html, /id="process-summary"/);
   assert.match(html, /class="thinking-header-rule"/);
   assert.ok((html.match(/<circle\b/g) || []).length >= 13);
+  assert.match(await read('experience-system.css'), /anchor-alias#capabilities[^}]*padding:\s*0!important/);
 });
 
 test('one top-level thinking timeline owns the pinned sequence', async () => {

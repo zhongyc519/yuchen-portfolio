@@ -52,7 +52,7 @@
   function buildHeroTimeline({ mobile }) {
     const hero = document.querySelector('#hero-scene');
     const scenes = gsap.utils.toArray('[data-hero-scene]', hero);
-    if (!hero || scenes.length !== 5) return null;
+    if (!hero || scenes.length !== 4) return null;
 
     document.body.classList.add('continuous-motion');
     gsap.set(scenes, { autoAlpha: 0, y: 46, scale: .985, filter: 'blur(9px)', clipPath: 'inset(12% 0 12% 0)' });
@@ -64,13 +64,13 @@
         id: 'hero-sequence',
         trigger: hero,
         start: 'top top',
-        end: () => `+=${innerHeight * (mobile ? 4.45 : 5.1)}`,
+        end: () => `+=${innerHeight * (mobile ? 3.5 : 4.05)}`,
         pin: true,
         scrub: mobile ? .55 : .82,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate(self) {
-          const active = Math.min(4, Math.floor(self.progress * 5));
+          const active = Math.min(3, Math.floor(self.progress * 4));
           setHeroScene(scenes, active);
           radiant.progress = self.progress;
           radiant.dark = gsap.utils.clamp(0, .48, Math.max(0, self.progress - .54) * .92);

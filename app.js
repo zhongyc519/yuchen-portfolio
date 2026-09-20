@@ -71,7 +71,9 @@
     const rail=document.querySelector('#process-rail');
     const summary=document.querySelector('#process-summary');
     const field=document.querySelector('.process-field');
+    const heroSignature=document.querySelector('#hero-method-signature');
     if(!stage||!rail||!summary||!field||!content.process)return;
+    if(heroSignature)heroSignature.innerHTML=content.process.map(item=>`<span data-method-icon="${item.id}">${processIconSvg(item.id)}</span>`).join('');
     stage.innerHTML=content.process.map((item,index)=>`<article class="process-stage${index===0?' is-active':''}" data-stage="${item.id}"><div class="process-meta"><span>${item.number} / PROCESS</span><span>${pick('INPUT → OUTPUT','输入 → 输出')}</span></div><div class="process-stage-title"><span class="process-stage-icon">${processIconSvg(item.id)}</span><h3>${pick(item.en,item.zh)}</h3></div><p class="process-meaning">${pick(item.meaningEn,item.meaningZh)}</p><ul>${pick(item.inputsEn,item.inputsZh).map(input=>`<li>${input}</li>`).join('')}</ul></article>`).join('');
     rail.innerHTML=content.process.map((item,index)=>`<li class="${index===0?'is-active':''}" data-stage-index="${index}"><span>${item.number}</span><b>${pick(item.en,item.zh)}</b></li>`).join('');
     summary.innerHTML=`<div class="process-summary-copy"><span>${pick('THE COMPLETE METHOD','完整工作方法')}</span><h3>${pick('From complexity to clarity.','从复杂，到清晰。')}</h3><p>${pick('Six connected moves. One clear direction.','六个相连步骤，形成一个清晰方向。')}</p></div><ol>${content.process.map(item=>`<li data-summary-stage="${item.id}"><span>${processIconSvg(item.id)}</span><b>${pick(item.en,item.zh)}</b><small>${item.number}</small></li>`).join('')}</ol>`;
