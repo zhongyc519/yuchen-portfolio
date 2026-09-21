@@ -1,4 +1,4 @@
-import { cp, mkdir, readdir, rm, stat } from 'node:fs/promises';
+import { cp, mkdir, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { extname, join, resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
@@ -20,6 +20,13 @@ for (const entry of await readdir(root)) {
 for (const directory of directories) {
   await cp(join(root, directory), join(output, directory), { recursive: true });
 }
+
+const publicCmsConfig = {
+  projectId: process.env.SANITY_PROJECT_ID || '',
+  dataset: process.env.SANITY_DATASET || 'production',
+  apiVersion: process.env.SANITY_API_VERSION || '2026-09-21',
+};
+await writeFile(join(output, 'cms-config.js'), `window.SANITY_PUBLIC_CONFIG=${JSON.stringify(publicCmsConfig)};\n`, 'utf8');
 
 const builtIndex = await stat(join(output, 'index.html'));
 if (!builtIndex.isFile()) throw new Error('Production build is missing index.html');

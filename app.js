@@ -5,6 +5,7 @@
   let activeCase = 0;
   const original = new Map([...document.querySelectorAll('[data-i18n]')].map(el => [el, el.innerHTML]));
   const pick = (en, zh) => language === 'en' ? en : zh;
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"]/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[character]));
   const guide = document.querySelector('#guide-dialog');
   const caseDialog = document.querySelector('#case-dialog');
   function renderArchive() {
@@ -22,15 +23,41 @@
     const categories=content.workCategories;
     document.querySelector('#work-filters').innerHTML=categories.map(([id,en,zh])=>`<button data-work-filter="${id}" aria-pressed="${workFilter===id}">${pick(en,zh)}</button>`).join('');
     document.querySelector('#work-grid').innerHTML=content.cases.map((item,i)=>({item,i})).filter(({item})=>workFilter==='all'||item.category===workFilter).map(({item,i})=>{
-      const category=categories.find(row=>row[0]===item.category);
-      return `<button class="work-card work-entry" data-case="${i}"><div class="work-entry-cover ${item.image?'has-project-image':''}">${item.image?`<img src="${item.image}" alt="${pick(item.imageAltEn,item.imageAltZh)}" loading="lazy" decoding="async">`:''}<span>${pick(item.tagEn,item.tagZh)}</span><small>${pick(item.collection?'COLLECTION IN PROGRESS':'PROJECT OVERVIEW',item.collection?'作品集整理中':'项目概览')}</small></div><div class="card-details"><p>${pick(category[1],category[2])}</p><h3>${pick(item.en,item.zh)} <span>↗</span></h3></div></button>`;
+      const category=categories.find(row=>row[0]===item.category) || [item.category,'Other','其他'];
+      const coverStyle=item.imagePosition?` style="object-position:${escapeHtml(item.imagePosition)}"`:'';
+      return `<button class="work-card work-entry" data-case="${i}"><div class="work-entry-cover ${item.image?'has-project-image':''}">${item.image?`<img src="${escapeHtml(item.image)}" alt="${escapeHtml(pick(item.imageAltEn,item.imageAltZh))}" loading="lazy" decoding="async"${coverStyle}>`:''}<span>${escapeHtml(pick(item.tagEn,item.tagZh))}</span><small>${pick(item.collection?'COLLECTION IN PROGRESS':'PROJECT OVERVIEW',item.collection?'作品集整理中':'项目概览')}</small></div><div class="card-details"><p>${escapeHtml(pick(category[1],category[2]))}</p><h3>${escapeHtml(pick(item.en,item.zh))} <span>↗</span></h3></div></button>`;
     }).join('');
   }
   function renderCase() {
     const item = content.cases[activeCase];
     document.querySelector('#case-title').textContent=pick(item.en,item.zh);
     caseDialog.querySelectorAll('.case-project-media, .case-project-gallery').forEach(el=>el.remove());
-    if(item.galleryGroups){
+    if(item.sections?.length){
+      const gallery=document.createElement('div');gallery.className='case-project-gallery cms-project-sections';
+      item.sections.forEach((projectSection,sectionIndex)=>{
+        const section=document.createElement('section');section.className='case-project-section';
+        const label=pick(projectSection.labelEn,projectSection.labelZh);
+        const heading=document.createElement('h3');heading.textContent=`${projectSection.number || String(sectionIndex+1).padStart(2,'0')} / ${label || pick(projectSection.headingEn,projectSection.headingZh)}`;section.append(heading);
+        const sectionHeading=pick(projectSection.headingEn,projectSection.headingZh);
+        if(sectionHeading && sectionHeading!==label){const title=document.createElement('h4');title.textContent=sectionHeading;section.append(title);}
+        const body=pick(projectSection.bodyEn,projectSection.bodyZh);
+        if(body){const paragraph=document.createElement('p');paragraph.textContent=body;section.append(paragraph);}
+        if(projectSection.images?.length){
+          const grid=document.createElement('div');grid.className='case-gallery-grid';
+          projectSection.images.forEach((asset,imageIndex)=>{
+            const figure=document.createElement('figure');figure.setAttribute('data-layout',asset.layout || 'standard');
+            const link=document.createElement('a');link.href=asset.originalSrc || asset.src;link.target='_blank';link.rel='noopener';
+            const image=document.createElement('img');image.src=asset.src;image.alt=pick(asset.altEn,asset.altZh);image.decoding='async';image.loading=sectionIndex===0 && imageIndex===0?'eager':'lazy';image.style.objectPosition=asset.objectPosition || '50% 50%';
+            link.append(image);figure.append(link);
+            const captionText=pick(asset.captionEn,asset.captionZh);if(captionText){const caption=document.createElement('figcaption');caption.textContent=captionText;figure.append(caption);}
+            grid.append(figure);
+          });
+          section.append(grid);
+        }
+        gallery.append(section);
+      });
+      document.querySelector('#case-steps').before(gallery);
+    }else if(item.galleryGroups){
       const gallery=document.createElement('div');gallery.className='case-project-gallery';
       item.galleryGroups.forEach((group,groupIndex)=>{
         const section=document.createElement('section');
@@ -53,7 +80,10 @@
       const caption=document.createElement('figcaption');caption.textContent=pick('UTP100 — event visual system. Open image at full size ↗','UTP100 — 赛事视觉系统。查看原图 ↗');figure.append(caption);
       document.querySelector('#case-steps').before(figure);
     }
-    document.querySelector('#case-steps').innerHTML=(item.steps || content.steps).map(([en,zh,descEn,descZh],i)=>`<article><span>0${i+1}</span><div><h3>${pick(en,zh)}</h3><p>${pick(descEn,descZh)}</p></div></article>`).join('');
+    const cmsOverview=[];
+    if(item.summaryEn||item.summaryZh)cmsOverview.push(['Project summary','项目概述',item.summaryEn,item.summaryZh]);
+    if(item.roleEn||item.roleZh)cmsOverview.push(['My contribution','我的贡献',item.roleEn,item.roleZh]);
+    document.querySelector('#case-steps').innerHTML=(cmsOverview.length?cmsOverview:(item.steps || content.steps)).map(([en,zh,descEn,descZh],i)=>`<article><span>0${i+1}</span><div><h3>${escapeHtml(pick(en,zh))}</h3><p>${escapeHtml(pick(descEn,descZh))}</p></div></article>`).join('');
   }
   function processIconSvg(id){
     const paths={
@@ -115,4 +145,13 @@
   });
   guide.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>guide.close()));
   render();
+  if(!window.portfolioCms)return;
+  window.portfolioCms.loadProjects(content.cases,content.workCategories).then(result=>{
+    if(result.source!=='sanity')return;
+    content.cases=result.projects;
+    content.workCategories=result.categories;
+    if(workFilter!=='all'&&!content.workCategories.some(row=>row[0]===workFilter))workFilter='all';
+    activeCase=Math.min(activeCase,Math.max(0,content.cases.length-1));
+    render();
+  });
 })();
